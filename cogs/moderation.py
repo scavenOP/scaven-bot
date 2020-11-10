@@ -108,7 +108,7 @@ class mod(commands.Cog, name='Moderation'):
                 await ctx.send(embed=embed)
 
     @commands.command()
-    @commands.has_permissions(manage_messages=True)
+    @commands.has_permissions(manage_server=True)
     async def warn(self,ctx, member: discord.Member , *,args):
         if args != None:
             try:
