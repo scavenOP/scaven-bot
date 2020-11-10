@@ -13,6 +13,7 @@ bot = commands.Bot(command_prefix = ',', intents=intents)
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(activity=discord.Game('type ,cmds for commands'))
     print("I am Ready!")
 
 
