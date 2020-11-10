@@ -18,7 +18,7 @@ async def on_ready():
 
 
 @bot.command()
-async def help(ctx):
+async def cmds(ctx):
     embed=discord.Embed(
         description='**CLEAR MESSAGES**\n```,clear <no of messeges>```\n**EMBED Messeges**\n```,say <massege>```\n**KICK MEMBER**\n```,kick <member> <reason>```\n**BAN MEMBER**\n```,ban <member> <reason>```\n**UNBAN MEMBER**\n```,unban <member>```\n**WARN MEMBER**\n```,warn <member> <reason>```\n**SHOW AVATAR**\n```,avatar <member> ```',
         color = discord.Color.blue()
