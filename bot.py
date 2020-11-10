@@ -63,7 +63,10 @@ async def on_member_remove(member):
     except Exception as e:
         print(e)
 
-extentions=['cogs.moderation','cogs.avatar']
+extentions=['cogs.moderation',
+            'cogs.avatar',
+            'cogs.imagefun']
+            
 if __name__ == "__main__":
     for extention in extentions:
         try:
