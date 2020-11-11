@@ -81,6 +81,31 @@ class ifun(commands.Cog, name='Moderation'):
                 await ctx.send('would you spank yourself??? mention a member to spank')
 
 
+    @commands.command()
+    async def punch(self,ctx, user: discord.Member):
+            
+    
+        punch = Image.open("punch.jpg")
+
+        asset = user.avatar_url_as(size = 128)
+        asset1 = ctx.author.avatar_url_as(size = 128)
+        data = BytesIO(await asset.read())
+        data1 = BytesIO(await asset1.read())
+        pfp = Image.open(data)
+        pfp1 = Image.open(data1)
+        pfp = pfp.resize((74,74))
+        pfp1 = pfp1.resize((103,103))
+        punch.paste(pfp, (76,209))
+        punch.paste(pfp1, (303,99))
+        punch.save("punching.jpg")
+        await ctx.send(file = discord.File("punching.jpg"))
+
+    @spank.error
+    async def spank_error(self,ctx , error):
+            if isinstance(error, commands.MissingRequiredArgument):
+                await ctx.send('would you punch yourself??? mention a member to spank')
+
+
 def setup(bot):
     bot.add_cog(ifun((bot)))
     print('cog is loaded!')
