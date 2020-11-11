@@ -100,8 +100,8 @@ class ifun(commands.Cog, name='Moderation'):
         punch.save("punching.jpg")
         await ctx.send(file = discord.File("punching.jpg"))
 
-    @spank.error
-    async def spank_error(self,ctx , error):
+    @punch.error
+    async def punch_error(self,ctx , error):
             if isinstance(error, commands.MissingRequiredArgument):
                 await ctx.send('would you punch yourself??? mention a member to spank')
 
