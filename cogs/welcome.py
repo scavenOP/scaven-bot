@@ -39,6 +39,7 @@ class welcome(commands.Cog, name='welcome'):
     @commands.group(invoke_without_command=True)
     async def welcome(self,ctx):
         embed=discord.Embed(title='Welcome messege Setup Commands',description='**Set channel to send welcome massege** \n `,welcome channel <#channel>` \n **Set welcome massege** \n `,welcome text <messages>`',color =0x0bf9f9)
+        embed.add_field(name="`{user}`",value=f'[Download]({user.avatar_url})')
         await ctx.send(embed=embed)
 
     @welcome.command()
