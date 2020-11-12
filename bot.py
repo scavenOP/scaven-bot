@@ -38,14 +38,14 @@ async def help(ctx):
 
 @bot.command()
 async def info(ctx):
-    servers = list(bot.servers)   
+    servers = list(bot.guilds)   
     embed = discord.Embed(
     title='SCAVEN Bot',
     description='**Made by SCAVEN#2050**',
     color=0x0bf9f9
     )
-    embed.add_field(name='No of servers bot is present in',value=f'{str(len(servers))}')
-    embed.add_field(name='👇👇Invite Link!',value=f'[Invite me!]({"https://discord.com/api/oauth2/authorize?client_id=766177290542907413&permissions=8&scope=bot"})')   
+    embed.add_field(name='No of servers bot is present in :',value='**Invite link :**')
+    embed.add_field(name=f'{str(len(servers))}',value=f'[Invite me!]({"https://discord.com/api/oauth2/authorize?client_id=766177290542907413&permissions=8&scope=bot"})')   
     embed.set_image(url="https://cdn.discordapp.com/attachments/773564874822647848/776362486298705930/watermark.png")
     embed.set_footer(text=f'Requested by {ctx.author.name}' , icon_url= ctx.author.avatar_url)
     await ctx.send(embed=embed)
