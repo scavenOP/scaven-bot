@@ -18,7 +18,7 @@ class mod(commands.Cog, name='Moderation'):
         await ctx.channel.purge(limit=amount+1)
         embed=discord.Embed(
             description=(f'{amount} messsages deleted !'),
-            color = discord.Color.blue()
+            color =0x0bf9f9
         )
         await ctx.send(embed=embed, delete_after= 1)
         
@@ -28,7 +28,7 @@ class mod(commands.Cog, name='Moderation'):
         if isinstance(error , commands.MissingRequiredArgument):
             embed=discord.Embed(
             description='Please specify the number of messeges to clear!',
-            color = discord.Color.blue()
+            color =0x0bf9f9
         )
         await ctx.send(embed=embed)
 
@@ -38,7 +38,7 @@ class mod(commands.Cog, name='Moderation'):
         await member.kick(reason=reason)
         embed=discord.Embed(
             description=(f'{member.name} was successfully kicked for {reason}'),
-            color = discord.Color.blue()
+            color =0x0bf9f9
         )
         await ctx.send(embed=embed)
 
@@ -47,14 +47,14 @@ class mod(commands.Cog, name='Moderation'):
         if isinstance(error, commands.MissingRequiredArgument):
             embed1=discord.Embed(
             description='Please mention a user and reason to kick',
-            color = discord.Color.blue()
+            color =0x0bf9f9
             )
             await ctx.send(embed=embed1)
 
         elif isinstance(error, commands.MissingPermissions):
             embed=discord.Embed(
             description='You dont have **kick members** permission',
-            color = discord.Color.blue()
+            color =0x0bf9f9
             )
             await ctx.send(embed=embed)
         raise error
@@ -68,7 +68,7 @@ class mod(commands.Cog, name='Moderation'):
         await member.ban(reason=reason)
         embed=discord.Embed(
             description=(f'{member.name} was successfully banned for {reason}'),
-            color = discord.Color.blue()
+            color =0x0bf9f9
         )
         await ctx.send(embed=embed)
 
@@ -77,14 +77,14 @@ class mod(commands.Cog, name='Moderation'):
         if isinstance(error, commands.MissingRequiredArgument):
             embed1=discord.Embed(
             description='Please mention a user and a reason to ban',
-            color = discord.Color.blue()
+            color =0x0bf9f9
             )
             await ctx.send(embed=embed1)
 
         elif isinstance(error, commands.MissingPermissions):
             embed=discord.Embed(
             description='You dont have Ban members permission',
-            color = discord.Color.blue()
+            color =0x0bf9f9
             )
             await ctx.send(embed=embed)
         raise error
@@ -103,7 +103,7 @@ class mod(commands.Cog, name='Moderation'):
                 await ctx.guild.unban(user)
                 embed=discord.Embed(
                 description=(f'{user.name} was successfully unbaned'),
-                color = discord.Color.blue()
+                color =0x0bf9f9
                 )
                 await ctx.send(embed=embed)
 
@@ -115,7 +115,7 @@ class mod(commands.Cog, name='Moderation'):
                 await member.send(f'You have been warned : {args}')
                 embed=discord.Embed(
                 description=(f'{member} was warned for {args}'),
-                color = discord.Color.blue()
+                color =0x0bf9f9
                 )
                 await ctx.send(embed=embed)
             except:
@@ -134,7 +134,7 @@ class mod(commands.Cog, name='Moderation'):
         elif isinstance(error, commands.MissingPermissions):
             embed=discord.Embed(
             description='You dont have Manage messages permission',
-            color = discord.Color.blue()
+            color =0x0bf9f9
             )
             await ctx.send(embed=embed)
         raise error
