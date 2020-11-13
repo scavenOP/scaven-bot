@@ -74,9 +74,11 @@ class level(commands.Cog, name='level'):
 
                     cursor1.execute(f"SELECT expchannel_id FROM welcome WHERE guild_id = {message.guild.id}")
                     result4 = cursor1.fetchone()
-                    channel = message.guild.get_channel(int(result4[0]))
-                    if channel != None:
-                        await channel.send(f'{message.author.mention} has leveled up to level {lvl_start + 1}.')
+                    channel1 = message.guild.get_channel(int(result4[0]))
+                    if channel1 != None:
+                        await channel1.send(f'{message.author.mention} has leveled up to level {lvl_start + 1}.')
+                    else:
+                         await message.channel.send(f'{message.author.mention} has leveled up to level {lvl_start + 1}.')   
                     sql = ('UPDATE levels SET lvl = ? WHERE guild_id = ? and user_id = ?')
                     val = (int(lvl_start + 1), str(message.guild.id), str(message.author.id))
                     cursor.execute(sql, val)
