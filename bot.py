@@ -8,6 +8,7 @@ import os
 import traceback
 from discord.utils import get
 import sqlite3
+from disputils import BotEmbedPaginator
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix = ',', intents=intents)
@@ -21,20 +22,44 @@ async def on_ready():
         CREATE TABLE IF NOT EXISTS welcome(
         guild_id TEXT,
         msg TEXT,
-        channel_id TEXT)
+        channel_id TEXT,
+        expchannel_id TEXT)
      ''')
+
+    cursor.close()
+    db.close()
+    db = sqlite3.connect('leveling.sqlite')
+    cursor = db.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS levels(
+        guild_id TEXT,
+        user_id TEXT,
+        exp TEXT,
+        lvl TEXT,
+        rank_exp TEXT)
+    ''')
     await bot.change_presence(activity=discord.Game('type ,help for commands'))
     print("I am Ready!")
 
 
 @bot.command()
 async def help(ctx):
-    embed=discord.Embed(
-        description='**Moderater commands **\n```,modcmd ```\n**SET Welcome message **\n```,welcome ```\n**Fun commands**\n```,fun ```\n**INVITE ME**\n```,invite ```\n**Bot info**\n```,info```',
-        color =0x0bf9f9
-    )
+    embed1 = discord.Embed(title="General Commands", description="**BOT INFO**\n`,info`\n\n**INVITE THE BOT**\n`,invite`\n\n**SET USER WELCOME**\n`,welcome`\n\n**SET EXP Level up Channel**\n`,expchannel`", color=0x0bf9f9, thumbnail= ctx.guild.icon_url)
+    embed1.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/773564874822647848/776808076107055154/watermark.png')
+    embed2 = discord.Embed(title="Moderation Commands", description='**CLEAR MESSAGES**\n`,clear <no of messeges>`\n\n**EMBED Messeges**\n`,say <massege>\n\n`**KICK MEMBER**\n`,kick <member> <reason>`\n\n**BAN MEMBER**\n`,ban <member> <reason>`\n\n**UNBAN MEMBER**\n`,unban <member>`\n\n**WARN MEMBER**\n`,warn <member> <reason>`\n\n**SEE  EXP  LEVEL**\n`,level `', color=0x0bf9f9)
+    embed2.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/773564874822647848/776808076107055154/watermark.png')
+    embed3 = discord.Embed(title="Fun Command", description="**SLAP user**\n`,slap <user>`\n\n**SPANK user**\n`,spank <user>`\n\n**PUNCH user**\n`,punch <user>`\n\n**wanted user**\n`,wanted <user>`\n\n**SHOW AVATAR**\n`,avatar <member> `", color=0x0bf9f9)
+    embed3.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/773564874822647848/776808076107055154/watermark.png')
     
-    await ctx.send(embed=embed) 
+    embeds = [
+        embed1,
+        embed2,
+        embed3
+    ]
+
+    paginator = BotEmbedPaginator(ctx, embeds) #This will take all the embeds you provided in the embeds list and will create a paginator.
+    await paginator.run()@bot.command()
+
 
 @bot.command()
 async def info(ctx):
@@ -61,24 +86,7 @@ async def invite(ctx):
     await ctx.send(embed=embed) 
 
 
-@bot.command()
-async def modcmd(ctx):
-    embed=discord.Embed(
-        description='**CLEAR MESSAGES**\n```,clear <no of messeges>```\n**EMBED Messeges**\n```,say <massege>```\n**KICK MEMBER**\n```,kick <member> <reason>```\n**BAN MEMBER**\n```,ban <member> <reason>```\n**UNBAN MEMBER**\n```,unban <member>```\n**WARN MEMBER**\n```,warn <member> <reason>```',
-        color =0x0bf9f9
-    )
-    
-    await ctx.send(embed=embed) 
 
-
-@bot.command()
-async def fun(ctx):
-    embed=discord.Embed(
-        description='**SLAP user**\n```,slap <user>``` \n**SPANK user**\n```,spank <user>```\n**PUNCH user**\n```,punch <user>```\n**wanted user**\n```,wanted <user>```\n**SHOW AVATAR**\n```,avatar <member> ```',
-        color =0x0bf9f9
-    )
-    
-    await ctx.send(embed=embed) 
 
 @bot.command()
 @commands.has_permissions(manage_messages=True)
@@ -92,12 +100,65 @@ async def say(ctx, *,msg):
     await ctx.message.delete()
 
 
+@bot.command()
+async def level(ctx, user:discord.User=None):
+    if user is None:
+        db = sqlite3.connect('leveling.sqlite')
+        cursor = db.cursor()
+        cursor.execute(f'SELECT user_id, exp, lvl FROM levels WHERE guild_id = {ctx.message.guild.id} and user_id = {ctx.message.author.id}')
+        result = cursor.fetchone()
+        if result is None:
+            embed=discord.Embed(
+            title=('**Level Check**'),
+            description=(f'**User not ranked**'),
+            color =0x0bf9f9
+            )
+            embed.set_thumbnail(url = ctx.guild.icon_url)
+            await ctx.send(embed=embed) 
+            
+        else:
+            embed1=discord.Embed(
+            title=('**Level Check**'),
+            description=(f'**{ctx.message.author.name} is currently at level =** `{str(result[2])}` **and has** `{str(result[1])}` **XP**'),
+            color =0x0bf9f9
+            )
+            embed1.set_thumbnail(url = ctx.guild.icon_url)
+            await ctx.send(embed=embed1) 
+            cursor.close()
+            db.close()
+    else:
+        db = sqlite3.connect('leveling.sqlite')
+        cursor = db.cursor()
+        cursor.execute(f'SELECT user_id, exp, lvl FROM levels WHERE guild_id = {ctx.message.guild.id} and user_id = {user.id}')
+        result = cursor.fetchone()
+        if result is None:
+            embed=discord.Embed(
+            title=('**Level Check**'),
+            description=(f'**User not ranked**'),
+            color =0x0bf9f9
+            )
+            embed.set_thumbnail(url = ctx.guild.icon_url)
+            await ctx.send(embed=embed) 
+        else:
+            embed1=discord.Embed(
+            title=('**Level Check**'),
+            description=(f'**{user.name} is currently at level =** `{str(result[2])}` **and has** `{str(result[1])}` **XP**'),
+            color =0x0bf9f9
+            )
+            embed1.set_thumbnail(url = ctx.guild.icon_url)
+            await ctx.send(embed=embed1) 
+            cursor.close()
+            db.close()
+
+
+
 
 
 extentions=['cogs.moderation',
             'cogs.avatar',
             'cogs.imagefun',
-            'cogs.welcome']
+            'cogs.welcome',
+            'cogs.level']
             
 if __name__ == "__main__":
     for extention in extentions:
