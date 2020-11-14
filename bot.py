@@ -44,17 +44,20 @@ async def on_ready():
 
 @bot.command()
 async def help(ctx):
-    embed1 = discord.Embed(title="General Commands", description="**BOT INFO**\n`,info`\n\n**INVITE THE BOT**\n`,invite`\n\n**SET USER WELCOME**\n`,welcome`\n\n**SET EXP Level up Channel**\n`,expchannel`", color=0x0bf9f9, thumbnail= ctx.guild.icon_url)
+    embed1 = discord.Embed(title="<a:royal:777028611001417768> General Commands <a:royal:777028611001417768>", description="<a:pin1:763647258305757205> **BOT INFO**\n`,info`\n\n<a:pin1:763647258305757205> **INVITE THE BOT**\n`,invite`\n\n<a:pin1:763647258305757205> **SET USER WELCOME**\n`,welcome`\n\n<a:pin1:763647258305757205> **SET EXP Level up Channel**\n`,expchannel`", color=0x0bf9f9, thumbnail= ctx.guild.icon_url)
     embed1.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/773564874822647848/776808076107055154/watermark.png')
-    embed2 = discord.Embed(title="Moderation Commands", description='**CLEAR MESSAGES**\n`,clear <no of messeges>`\n\n**EMBED Messeges**\n`,say <massege>\n\n`**KICK MEMBER**\n`,kick <member> <reason>`\n\n**BAN MEMBER**\n`,ban <member> <reason>`\n\n**UNBAN MEMBER**\n`,unban <member>`\n\n**WARN MEMBER**\n`,warn <member> <reason>`\n\n**SEE  EXP  LEVEL**\n`,level `', color=0x0bf9f9)
+    embed2 = discord.Embed(title="<a:royal:777028611001417768> Moderation Commands <a:royal:777028611001417768>", description='<a:pin1:763647258305757205> **CLEAR MESSAGES**\n`,clear <no of messeges>`\n\n<a:pin1:763647258305757205> **EMBED Messeges**\n`,say <massege>`\n\n<a:pin1:763647258305757205> **KICK MEMBER**\n`,kick <member> <reason>`\n\n<a:pin1:763647258305757205> **BAN MEMBER**\n`,ban <member> <reason>`\n\n<a:pin1:763647258305757205> **UNBAN MEMBER**\n`,unban <member>`\n\n<a:pin1:763647258305757205> **WARN MEMBER**\n`,warn <member> <reason>`', color=0x0bf9f9)
     embed2.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/773564874822647848/776808076107055154/watermark.png')
-    embed3 = discord.Embed(title="Fun Command", description="**SLAP user**\n`,slap <user>`\n\n**SPANK user**\n`,spank <user>`\n\n**PUNCH user**\n`,punch <user>`\n\n**wanted user**\n`,wanted <user>`\n\n**SHOW AVATAR**\n`,avatar <member> `", color=0x0bf9f9)
+    embed3 = discord.Embed(title="<a:royal:777028611001417768> Fun Command <a:royal:777028611001417768>", description="<a:pin1:763647258305757205> **SLAP user**\n`,slap <user>`\n\n<a:pin1:763647258305757205> **SPANK user**\n`,spank <user>`\n\n<a:pin1:763647258305757205> **PUNCH user**\n`,punch <user>`\n\n<a:pin1:763647258305757205> **wanted user**\n`,wanted <user>`\n\n<a:pin1:763647258305757205> **SHOW AVATAR**\n`,avatar <member> `", color=0x0bf9f9)
     embed3.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/773564874822647848/776808076107055154/watermark.png')
+    embed4 = discord.Embed(title="<a:royal:777028611001417768> SERVER EXP Command <a:royal:777028611001417768>", description="<a:pin1:763647258305757205> **SET Level up Channel**\n`,expchannel <channel>`\n\n<a:pin1:763647258305757205> **Check Level**\n`,level <user>`\n\n<a:pin1:763647258305757205> **Check Server Leaderboard**\n`,explb`", color=0x0bf9f9)
+    embed4.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/773564874822647848/776808076107055154/watermark.png')
     
     embeds = [
         embed1,
         embed2,
-        embed3
+        embed3,
+        embed4
     ]
 
     paginator = BotEmbedPaginator(ctx, embeds) #This will take all the embeds you provided in the embeds list and will create a paginator.
@@ -65,8 +68,8 @@ async def help(ctx):
 async def info(ctx):
     servers = list(bot.guilds)   
     embed = discord.Embed(
-    title='SCAVEN Bot',
-    description=f'**Made by SCAVEN#2050**\n\n\n**No of servers bot is present in : {str(len(servers))}**\n\n**Invite link :** [Invite me!]({"https://discord.com/api/oauth2/authorize?client_id=766177290542907413&permissions=8&scope=bot"})\n\n**Support Server :** [JOIN!]({"https://discord.gg/zhyvbR9UFr"})" ',
+    title='<a:royal:777028611001417768> SCAVEN Bot <a:royal:777028611001417768>',
+    description=f'\n<a:tools1:763647191414997033> **Made by SCAVEN#2050** <a:tools1:763647191414997033>\n\n\n<a:pin1:763647258305757205> **No of servers bot is present in : {str(len(servers))}**\n\n <a:pin1:763647258305757205> **Invite link :** [Invite me!]({"https://discord.com/api/oauth2/authorize?client_id=766177290542907413&permissions=8&scope=bot"})\n\n<a:pin1:763647258305757205> **Support Server :** [JOIN!]({"https://discord.gg/zhyvbR9UFr"})" ',
     color=0x0bf9f9
     )
     embed.set_image(url="https://cdn.discordapp.com/attachments/773564874822647848/776362486298705930/watermark.png")
@@ -98,55 +101,7 @@ async def say(ctx, *,msg):
     await ctx.message.delete()
 
 
-@bot.command()
-async def level(ctx, user:discord.User=None):
-    if user is None:
-        db = sqlite3.connect('leveling.sqlite')
-        cursor = db.cursor()
-        cursor.execute(f'SELECT user_id, exp, lvl FROM levels WHERE guild_id = {ctx.message.guild.id} and user_id = {ctx.message.author.id}')
-        result = cursor.fetchone()
-        if result is None:
-            embed=discord.Embed(
-            title=('**Level Check**'),
-            description=(f'**User not ranked**'),
-            color =0x0bf9f9
-            )
-            embed.set_thumbnail(url = ctx.guild.icon_url)
-            await ctx.send(embed=embed) 
-            
-        else:
-            embed1=discord.Embed(
-            title=('**Level Check**'),
-            description=(f'**{ctx.message.author.name} is currently at level =** `{str(result[2])}` **and has** `{str(result[1])}` **XP**'),
-            color =0x0bf9f9
-            )
-            embed1.set_thumbnail(url = ctx.guild.icon_url)
-            await ctx.send(embed=embed1) 
-            cursor.close()
-            db.close()
-    else:
-        db = sqlite3.connect('leveling.sqlite')
-        cursor = db.cursor()
-        cursor.execute(f'SELECT user_id, exp, lvl FROM levels WHERE guild_id = {ctx.message.guild.id} and user_id = {user.id}')
-        result = cursor.fetchone()
-        if result is None:
-            embed=discord.Embed(
-            title=('**Level Check**'),
-            description=(f'**User not ranked**'),
-            color =0x0bf9f9
-            )
-            embed.set_thumbnail(url = ctx.guild.icon_url)
-            await ctx.send(embed=embed) 
-        else:
-            embed1=discord.Embed(
-            title=('**Level Check**'),
-            description=(f'**{user.name} is currently at level =** `{str(result[2])}` **and has** `{str(result[1])}` **XP**'),
-            color =0x0bf9f9
-            )
-            embed1.set_thumbnail(url = ctx.guild.icon_url)
-            await ctx.send(embed=embed1) 
-            cursor.close()
-            db.close()
+
 
 
 
@@ -156,7 +111,8 @@ extentions=['cogs.moderation',
             'cogs.avatar',
             'cogs.imagefun',
             'cogs.welcome',
-            'cogs.level']
+            'cogs.level',
+            'cogs.lvlchk']
             
 if __name__ == "__main__":
     for extention in extentions:

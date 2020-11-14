@@ -49,15 +49,16 @@ class level(commands.Cog, name='level'):
                 cursor.execute(sql, val)
                 db.commit()
             else:
-                cursor.execute(f"SELECT user_id, exp, lvl FROM levels WHERE guild_id = {message.guild.id} and user_id = {message.author.id}")
+                cursor.execute(f"SELECT user_id, exp, rank_exp, lvl FROM levels WHERE guild_id = {message.guild.id} and user_id = {message.author.id}")
                 result1 = cursor.fetchone()
                 
                 exp = int(result1[1])
+                rank = int(result1[2])
                 sql = ('UPDATE levels SET exp = ? WHERE guild_id = ? and user_id = ?')
                 val = (exp + 2, str(message.guild.id), str(message.author.id))
                 cursor.execute(sql, val)
                 sql = ('UPDATE levels SET rank_exp = ? WHERE guild_id = ? and user_id = ?')
-                val = (exp + 2, str(message.guild.id), str(message.author.id))
+                val = (rank + 2, str(message.guild.id), str(message.author.id))
                 cursor.execute(sql, val)
                 db.commit()
                
