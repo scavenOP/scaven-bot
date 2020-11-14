@@ -138,6 +138,8 @@ class lvlchk(commands.Cog, name='lvlchk'):
         embed.set_thumbnail(url = ctx.guild.icon_url)
         embed.set_footer(text=f'Requested by {ctx.author.name}' , icon_url= ctx.author.avatar_url)
         await ctx.send(embed=embed)
+        cursor.close()
+        db.close()
 
 
 
