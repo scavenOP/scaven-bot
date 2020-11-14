@@ -61,7 +61,7 @@ async def help(ctx):
     ]
 
     paginator = BotEmbedPaginator(ctx, embeds) #This will take all the embeds you provided in the embeds list and will create a paginator.
-    await paginator.run()@bot.command()
+    await paginator.run()
 
 
 @bot.command()
