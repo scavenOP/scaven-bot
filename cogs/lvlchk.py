@@ -77,9 +77,8 @@ class lvlchk(commands.Cog, name='lvlchk'):
                 break
             else:
                 try:
-                    cursor.execute(f'SELECT rank_exp FROM levels  WHERE guild_id = {ctx.message.guild.id} and user_id = {int(person[0])}')
                     result2 = result = cursor.fetchone()
-                    res += f"<a:arrow1:777028732023078932> **{i} : {ctx.guild.get_member(int(person[0]))} with {result2[0]} XP**\n\n"
+                    res += f"<a:arrow1:777028732023078932> **{i} : {ctx.guild.get_member(int(person[0]))}**\n\n"
                     i+=1
                 except:
                     print(f'Error loading')
