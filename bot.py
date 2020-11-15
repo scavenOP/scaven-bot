@@ -43,6 +43,18 @@ async def on_ready():
 
 
 @bot.command()
+async def botservers(ctx):
+    if ctx.message.author.id =='566197973260828682':
+        activeservers = bot.guilds
+        res = "\n\n\n"
+        for server in activeservers:
+            res += f'{server}\n'
+
+        await ctx.send(f'res')
+    else:
+        await ctx.send('This command is only for bot owner')
+
+@bot.command()
 async def help(ctx):
     embed1 = discord.Embed(title="<a:royal:777028611001417768> General Commands <a:royal:777028611001417768>", description="<a:pin1:763647258305757205> **BOT INFO**\n`,info`\n\n<a:pin1:763647258305757205> **INVITE THE BOT**\n`,invite`\n\n<a:pin1:763647258305757205> **SET USER WELCOME**\n`,welcome`\n\n<a:pin1:763647258305757205> **SET EXP Level up Channel**\n`,expchannel`", color=0x0bf9f9, thumbnail= ctx.guild.icon_url)
     embed1.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/773564874822647848/776808076107055154/watermark.png')
