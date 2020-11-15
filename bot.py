@@ -44,13 +44,13 @@ async def on_ready():
 
 @bot.command()
 async def botservers(ctx):
-    if ctx.message.author.id =='566197973260828682':
+    if ctx.message.author.id == 566197973260828682:
         activeservers = bot.guilds
-        res = "\n\n\n"
+        res = "**__Bot is present in the following servers :__**\n"
         for server in activeservers:
-            res += f'{server}\n'
+            res += f'<a:pin1:763647258305757205> `{server}`\n'
 
-        await ctx.send(f'res')
+        await ctx.send(f'{res}')
     else:
         await ctx.send('This command is only for bot owner')
 
