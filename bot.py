@@ -81,7 +81,7 @@ async def info(ctx):
     servers = list(bot.guilds)   
     embed = discord.Embed(
     title='<a:royal:777028611001417768> SCAVEN Bot <a:royal:777028611001417768>',
-    description=f'\n<a:tools1:763647191414997033> **Made by SCAVEN#2050** <a:tools1:763647191414997033>\n\n\n<a:pin1:763647258305757205> **No of servers bot is present in : {str(len(servers))}**\n\n <a:pin1:763647258305757205> **Invite link :** [Invite me!]({"https://discord.com/api/oauth2/authorize?client_id=766177290542907413&permissions=8&scope=bot"})\n\n<a:pin1:763647258305757205> **Support Server :** [JOIN!]({"https://discord.gg/zhyvbR9UFr"})" ',
+    description=f'\n<a:tools1:763647191414997033> **Made by SCAVEN#2050** <a:tools1:763647191414997033>\n\n\n<a:pin1:763647258305757205> **No of servers bot is present in : {str(len(servers))}**\n\n <a:pin1:763647258305757205> **Invite link :** [Invite me!]({"https://discord.com/api/oauth2/authorize?client_id=766177290542907413&permissions=2146959223&scope=bot"})\n\n<a:pin1:763647258305757205> **Support Server :** [JOIN!]({"https://discord.gg/zhyvbR9UFr"})" ',
     color=0x0bf9f9
     )
     embed.set_image(url="https://cdn.discordapp.com/attachments/773564874822647848/776362486298705930/watermark.png")
