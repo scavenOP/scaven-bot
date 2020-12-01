@@ -77,7 +77,7 @@ class lvlchk(commands.Cog, name='lvlchk'):
                 break
             else:
                 try:
-                    result2 = result = cursor.fetchone()
+                    result = cursor.fetchone()
                     res += f"<a:arrow1:777028732023078932> **{i} : {ctx.guild.get_member(int(person[0]))}**\n\n"
                     i+=1
                 except:

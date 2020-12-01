@@ -140,7 +140,28 @@ class mod(commands.Cog, name='Moderation'):
         raise error
     
     
+    @commands.command()
+    @commands.has_permissions(manage_roles=True)
+    async def role(self, ctx, role: discord.Role, *users: discord.Member):
+        r =0
+        for user in users:
+            r +=1
+        await ctx.send(f"It may take {r} second ....plz wait")
+        for user in users:
+            await user.add_roles(role)
+        text = f"Added role `{role.name}` to "
+        for user in users:
+            text += f" {user.mention}"
+        await ctx.send(text)
 
+    @role.error
+    async def role_error(self,ctx , error):
+        if isinstance(error, commands.MissingPermissions):
+            embed=discord.Embed(
+            description='You dont have Manage role permission',
+            color =0x0bf9f9
+            )
+            await ctx.send(embed=embed)
         
         
 
