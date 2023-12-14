@@ -1,1 +1,2 @@
-"ContactProvided":[{"EmailAddressValue":null,"Label":"mobile","CountryDialingCode":"44","AreaCode":"44","PhoneNumber":"7000000000"}]
+Exception in thread "main" com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field "EmailAddressValue" (class Models.ContactProvided), not marked as ignorable (2 known properties: "EmailAddress", "Phone"])
+ at [Source: (File); line: 136, column: 78] (through reference chain: Models.OrderCreateRQ["Query"]->Models.Query["DataLists"]->Models.DataLists["ContactList"]->java.util.ArrayList[0]->Models.ContactInformation["ContactProvided"]->java.util.ArrayList[0]->Models.ContactProvided["EmailAddressValue"])
