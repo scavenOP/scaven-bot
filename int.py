@@ -1,2 +1,1 @@
-Exception in thread "main" com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot construct instance of `Models.OfferItem` (although at least one Creator exists): no String-argument constructor/factory method to deserialize from String value ('SH1')
- at [Source: (File); line: 28, column: 33] (through reference chain: Models.OrderCreateRQ["Query"]->Models.Query["Order"]->Models.Order["Offer"]->Models.Offer["OfferItem"]->java.util.ArrayList[0])
+"ContactProvided":[{"EmailAddressValue":null,"Label":"mobile","CountryDialingCode":"44","AreaCode":"44","PhoneNumber":"7000000000"}]
